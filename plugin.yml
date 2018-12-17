@@ -1,0 +1,12 @@
+name: Fourteen
+main: me.rida.fourteen.Fourteen
+version: 1.0
+author: Rida
+commands:
+  14:
+    description: Make everyone say 14.
+    aliases: [fourteen]
+permissions:
+  fourteen.use:
+    default: op
+    description: to use the /14 command.

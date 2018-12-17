@@ -1,0 +1,8 @@
+# You may use variable like this %counter% for count of the messages
+# %player% for the player who is sending the message
+# %sender% for the player who executed the command
+count: 10
+noPerm: '&cNo permission!'
+done: '&aDone!'
+spam: '14'
+permission: fourteen.use
