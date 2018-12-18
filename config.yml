@@ -6,3 +6,5 @@ noPerm: '&cNo permission!'
 done: '&aDone!'
 spam: '14'
 permission: fourteen.use
+reload: '&aReloaded!'
+unknown: '&cUnknown argument!'
