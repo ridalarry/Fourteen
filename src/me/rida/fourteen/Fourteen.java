@@ -27,6 +27,9 @@ public class Fourteen extends JavaPlugin {
 		if (this.getConfig().getString("reload") == null) {
 			this.getConfig().addDefault("reload", "&aReloaded!");
 		}
+		if (this.getConfig().getBoolean("rainbow") != true && this.getConfig().getBoolean("rainbow") != false) {
+			this.getConfig().addDefault("rainbow", false);
+		}
 		this.getConfig().options().copyDefaults(true);
 		saveConfig();
 		this.getCommand("14").setExecutor(new FourteenCommand(this));

@@ -8,3 +8,4 @@ spam: '14'
 permission: fourteen.use
 reload: '&aReloaded!'
 unknown: '&cUnknown argument!'
+rainbow: false

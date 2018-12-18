@@ -1,5 +1,9 @@
 package me.rida.fourteen;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,6 +18,8 @@ public class FourteenCommand implements CommandExecutor {
 	protected FourteenCommand(Fourteen Fourteen) {
 		this.Fourteen = Fourteen;
 	}
+	private List<String> colors = Arrays.asList("&a", "&b", "&c", "&d", "&e", "&f", "&1", "&2", "&3", "&4", "&5", "&6", "&7", "&8", "&9", "&0");
+	private Random rand = new Random();
 
 	@Override
 	public boolean onCommand(CommandSender s, Command c, String a, String[] g) {
@@ -38,7 +44,13 @@ public class FourteenCommand implements CommandExecutor {
 					for (count = Fourteen.getConfig().getLong("count") - 1; count >=0; --count) {
 						String countAsString = Long.toString(count+1);
 						String spam = Fourteen.getConfig().getString("spam");
-						Bukkit.getOnlinePlayers().forEach(p -> p.chat(ChatColor.translateAlternateColorCodes('&', spam.replaceAll("%counter%", countAsString).replaceAll("%sender%", s.getName()).replaceAll("%player%", p.getName()))));
+						int index = rand.nextInt(colors.size());
+						String color = (String) colors.get(index);
+						if (Fourteen.getConfig().getBoolean("rainbow") != true) {
+							color = "";
+						}
+						final String color2 = color;
+						Bukkit.getOnlinePlayers().forEach(p -> p.chat(ChatColor.translateAlternateColorCodes('&', color2 + spam.replaceAll("%counter%", countAsString).replaceAll("%sender%", s.getName()).replaceAll("%player%", p.getName()))));
 					}
 					s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("done")));
 				}
