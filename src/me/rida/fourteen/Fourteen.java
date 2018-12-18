@@ -7,7 +7,7 @@ public class Fourteen extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		this.getConfig().options().copyDefaults(true);
-		saveConfig();
+		saveDefaultConfig();
 		this.getCommand("14").setExecutor(new FourteenCommand(this));
 	}
 

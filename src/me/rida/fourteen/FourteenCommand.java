@@ -30,7 +30,7 @@ public class FourteenCommand implements CommandExecutor {
 				else if (g.length == 1) {
 					if (g[0].equalsIgnoreCase("reload")) {
 						Fourteen.reloadConfig();
-						Fourteen.saveConfig();
+						Fourteen.saveDefaultConfig();
 						s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("reload")));
 					}
 					else {
