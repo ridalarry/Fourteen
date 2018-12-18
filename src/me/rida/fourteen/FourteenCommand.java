@@ -21,18 +21,43 @@ public class FourteenCommand implements CommandExecutor {
 			s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("noPerm")));
 			return true;
 		}
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				long count;
-				for (count = Fourteen.getConfig().getLong("count") - 1; count >=0; --count) {
-					String countAsString = Long.toString(count+1);
-					Bukkit.getOnlinePlayers().forEach(p -> p.chat(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("spam").replaceAll("%counter%", countAsString).replaceAll("%sender%", s.getName()).replaceAll("%player%", p.getName()))));
-				}
-				s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("done")));
+		if(g.length == 1) {
+			if (g[0].equalsIgnoreCase("reload")) {
+				Fourteen.getConfig().getString("noPerm");
+				Fourteen.getConfig().getString("done");
+				Fourteen.getConfig().getString("spam");
+				Fourteen.getConfig().getString("permission");
+				Fourteen.getConfig().getString("unknown");
+				Fourteen.getConfig().getLong("count");
+				Fourteen.getConfig().getLong("reload");
+				s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("reload")));
+				Fourteen.reloadConfig();
+				Fourteen.saveConfig();
+				return true;
 			}
+			else {
+				s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("unknown")));
+				return true;
+			}
+		}
+		if(g.length == 0) {
+			new BukkitRunnable() {
+				@Override
+				public void run() {
+					long count;
+					for (count = Fourteen.getConfig().getLong("count") - 1; count >=0; --count) {
+						String countAsString = Long.toString(count+1);
+						Bukkit.getOnlinePlayers().forEach(p -> p.chat(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("spam").replaceAll("%counter%", countAsString).replaceAll("%sender%", s.getName()).replaceAll("%player%", p.getName()))));
+					}
+					s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("done")));
+				}
 
-		}.runTaskAsynchronously(Fourteen);
-		return true;
+			}.runTaskAsynchronously(Fourteen);
+			return true;
+		}
+		else {
+			s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("unknown")));
+			return true;
+		}
 	}
 }

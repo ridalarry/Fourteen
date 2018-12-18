@@ -15,6 +15,8 @@ public class Fourteen extends JavaPlugin {
 			this.getConfig().addDefault("done", "&aDone!");
 			this.getConfig().addDefault("spam", "14");
 			this.getConfig().addDefault("permission", "fourteen.use");
+			this.getConfig().addDefault("unknown", "&cUnknown argument!");
+			this.getConfig().addDefault("reload", "&aReloaded!");
 		}
 		else {
 			if (this.getConfig().getString("count") == null) {
@@ -31,6 +33,12 @@ public class Fourteen extends JavaPlugin {
 			}
 			if (this.getConfig().getString("permission") == null) {
 				this.getConfig().addDefault("permission", "fourteen.use");
+			}
+			if (this.getConfig().getString("unknown") == null) {
+				this.getConfig().addDefault("unknown", "&cUnknown argument!");
+			}
+			if (this.getConfig().getString("reload") == null) {
+				this.getConfig().addDefault("reload", "&aReloaded!");
 			}
 		}
 		this.getConfig().options().copyDefaults(true);
