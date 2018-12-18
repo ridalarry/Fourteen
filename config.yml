@@ -1,11 +1,24 @@
+# How many times you want the message to be spammed.
+count: 10
+# The message that shows up when a player has no permission.
+noPerm: '&cNo permission!'
+# The message that shows up when the spam is fully sent.
+done: '&aDone!'
+# The message that should be spammed.
 # You may use variable like this %counter% for count of the messages
 # %player% for the player who is sending the message
-# %sender% for the player who executed the command
-count: 10
-noPerm: '&cNo permission!'
-done: '&aDone!'
+# %sender% for the player who executed the command.
 spam: '14'
+# The permission for using the command.
 permission: fourteen.use
+# The message that shows up when the plugin is reloaded via a command.
 reload: '&aReloaded!'
+# When the player type an invalid argument of the command. 
 unknown: '&cUnknown argument!'
+# Do you want to have a random color for these messages.
 rainbow: false
+# How many seconds delay before the spam starts after executing the command
+# This is not the delay between messages and its in seconds
+# You may use 0.5 to have a half a second delay.
+# This delay affects all the commands recommended to stay 0
+delay: 0

@@ -14,13 +14,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 import me.rida.fourteen.Fourteen;
 
 public class FourteenCommand implements CommandExecutor {
-	private Fourteen Fourteen;
+	private final Fourteen Fourteen;
 	protected FourteenCommand(Fourteen Fourteen) {
 		this.Fourteen = Fourteen;
 	}
-	private List<String> colors = Arrays.asList("&a", "&b", "&c", "&d", "&e", "&f", "&1", "&2", "&3", "&4", "&5", "&6", "&7", "&8", "&9", "&0");
-	private Random rand = new Random();
-
+	private final List<String> colors = Arrays.asList("&a", "&b", "&c", "&d", "&e", "&f", "&1", "&2", "&3", "&4", "&5", "&6", "&7", "&8", "&9", "&0");
 	@Override
 	public boolean onCommand(CommandSender s, Command c, String a, String[] g) {
 		new BukkitRunnable() {
@@ -42,10 +40,9 @@ public class FourteenCommand implements CommandExecutor {
 				else if (g.length == 0) {
 					long count;
 					for (count = Fourteen.getConfig().getLong("count") - 1; count >=0; --count) {
-						String countAsString = Long.toString(count+1);
-						String spam = Fourteen.getConfig().getString("spam");
-						int index = rand.nextInt(colors.size());
-						String color = (String) colors.get(index);
+						final String countAsString = Long.toString(count+1);
+						final String spam = Fourteen.getConfig().getString("spam");
+						String color = (String) colors.get(new Random().nextInt(colors.size()));
 						if (Fourteen.getConfig().getBoolean("rainbow") != true) {
 							color = "";
 						}
@@ -55,7 +52,7 @@ public class FourteenCommand implements CommandExecutor {
 					s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("done")));
 				}
 			}
-		}.runTaskAsynchronously(Fourteen);
+		}.runTaskLaterAsynchronously(Fourteen, (long) (Fourteen.getConfig().getDouble("delay") * 20));
 		return true;
 	}
 }
