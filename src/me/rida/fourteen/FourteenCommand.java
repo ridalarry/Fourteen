@@ -18,23 +18,28 @@ public class FourteenCommand implements CommandExecutor {
 	protected FourteenCommand(Fourteen Fourteen) {
 		this.Fourteen = Fourteen;
 	}
-	private final List<String> colors = Arrays.asList("&a", "&b", "&c", "&d", "&e", "&f", "&1", "&2", "&3", "&4", "&5", "&6", "&7", "&8", "&9", "&0");
+	private final List<String> colors = Arrays.asList("&a", "&b", "&c", "&d", "&e", 
+			"&f", "&1", "&2", "&3", "&4", "&5", "&6", "&7", "&8", "&9", "&0");
+	private static String color(String string) {
+		return ChatColor.translateAlternateColorCodes('&', string);
+	}
 	@Override
 	public boolean onCommand(CommandSender s, Command c, String a, String[] g) {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
 				if (!s.hasPermission(Fourteen.getConfig().getString("permission"))) {
-					s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("noPerm")));
+					s.sendMessage(color(Fourteen.getConfig().getString("noPerm")));
 				}
 				else if (g.length == 1) {
 					if (g[0].equalsIgnoreCase("reload")) {
 						Fourteen.reloadConfig();
-						Fourteen.saveDefaultConfig();
-						s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("reload")));
+						Fourteen.getConfig().options().copyDefaults(true);
+						Fourteen.saveConfig();
+						s.sendMessage(color(Fourteen.getConfig().getString("reload")));
 					}
 					else {
-						s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("unknown")));
+						s.sendMessage(color(Fourteen.getConfig().getString("unknown")));
 					}
 				}
 				else if (g.length == 0) {
@@ -47,9 +52,11 @@ public class FourteenCommand implements CommandExecutor {
 							color = "";
 						}
 						final String color2 = color;
-						Bukkit.getOnlinePlayers().forEach(p -> p.chat(ChatColor.translateAlternateColorCodes('&', color2 + spam.replaceAll("%counter%", countAsString).replaceAll("%sender%", s.getName()).replaceAll("%player%", p.getName()))));
+						Bukkit.getOnlinePlayers().forEach(p -> p.chat(ChatColor.translateAlternateColorCodes('&', color2 
+								+ spam.replaceAll("%counter%", countAsString).replaceAll("%sender%", s.getName()).replaceAll(
+										"%player%", p.getName()))));
 					}
-					s.sendMessage(ChatColor.translateAlternateColorCodes('&', Fourteen.getConfig().getString("done")));
+					s.sendMessage(color(Fourteen.getConfig().getString("done")));
 				}
 			}
 		}.runTaskLaterAsynchronously(Fourteen, (long) (Fourteen.getConfig().getDouble("delay") * 20));
